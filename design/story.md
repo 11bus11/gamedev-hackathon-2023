@@ -1,6 +1,6 @@
 # Paradoxia
 
-Max Quantum, a fearless Temporal Agent, stands as the world's last hope against the chaos unleashed by the fiendish Dr. Chronosus. With time shattered and eras intertwining, Max Quantum must embark on a perilous journey to restore order to the fractured timeline.
+Max Quantum, a fearless Temporal Janitor, stands as the world's last hope against the chaos unleashed by the fiendish Dr. Chronosus. With time shattered and eras intertwining, Max Quantum must embark on a perilous journey to restore order to the fractured timeline.
 
 Armed with their sharp wits and unmatched cunning, Max Quantum must confront hordes of Anachronauts, the villainous soldiers plucked from history by Dr. Chronosus. These relentless adversaries pose a threat to the fabric of time itself!
 
