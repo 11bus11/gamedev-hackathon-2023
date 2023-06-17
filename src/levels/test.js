@@ -13,6 +13,7 @@ export class TestMap extends Phaser.Scene {
 
     #createLayer(name) {
         this.#map.createLayer(name, this.#tileset, 0, 0);
+        this.#map.setCollisionByProperty({collides: true});
     }
 
     preload() {
