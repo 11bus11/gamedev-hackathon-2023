@@ -8,6 +8,8 @@ export class Viking extends Actor {
     }
 
     update() {
-        
+        this.body.setVelosityX(100);
+
+        this.body.maxDistance = 300;
     }
 }
