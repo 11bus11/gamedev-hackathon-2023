@@ -1,3 +1,5 @@
+import { Player } from "../entities/player.js";
+
 
 export class TestMap extends Phaser.Scene {
 
@@ -6,13 +8,18 @@ export class TestMap extends Phaser.Scene {
     // Map Layers
     #layers = {
         walls: null,
-        spikes: null,
         platforms: null,
         background: null
     }
 
-    #createLayer(name) {
-        this.#map.createLayer(name, this.#tileset, 0, 0);
+    #player = null;
+
+    #createLayer(name, collides = false) {
+        const layer = this.#map.createLayer(name, this.#tileset, 0, 0);
+        if (collides) {
+            layer.setCollisionByProperty({collides: true});
+        }
+        return layer;
     }
 
     preload() {
@@ -22,15 +29,27 @@ export class TestMap extends Phaser.Scene {
             url: 'tilemaps/egypt-tiles.png'
         });
         this.load.tilemapTiledJSON('test', 'tilemaps/test.json');
+
+        this.load.image({
+            key: 'test-sprite',
+            url: 'characters/test.png'
+        });
     }
 
     create() {
         this.#map = this.make.tilemap({key: 'test', tileWidth: 16, tileHeight: 16});
+
         this.#tileset = this.#map.addTilesetImage('egypt-tiles', 'egypt-tiles');
 
         this.#layers.background = this.#createLayer('background');
-        this.#layers.platforms = this.#createLayer('platforms');
-        this.#layers.spikes = this.#createLayer('spikes');
-        this.#layers.walls = this.#createLayer('walls');
+        this.#layers.platforms = this.#createLayer('platforms', true);
+        this.#layers.walls = this.#createLayer('walls', true);
+
+        this.#player = new Player(this, 50, 260);
+        this.#player.setColliders(this.#layers.platforms, this.#layers.walls);
+    }
+
+    update() {
+        this.#player.update();
     }
 }

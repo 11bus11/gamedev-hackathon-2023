@@ -23,6 +23,7 @@
         "egypt-tiles.tsx"
     ],
     "project": "test.tiled-project",
+    "property.type": "bool",
     "recentFiles": [
         "egypt-tiles.tsx"
     ],
