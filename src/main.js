@@ -1,4 +1,4 @@
-import { Example } from "./scenes/example";
+import { TestMap } from "./levels/test.js";
 
 const config = {
   scale: {
@@ -13,7 +13,7 @@ const config = {
       gravity: { y: 200 },
     },
   },
-  scene: Example,
+  scene: TestMap,
 };
 
 const game = new Phaser.Game(config);
