@@ -2,7 +2,10 @@
 
 The player character. The Temporal Agency's most dilligent Janitor. With the time agents swamped fighting off the hordes of Anachronauts, Max is left alone with his all access keys and the Temporal Agency's armoury. Trading his mop for a Paradox Gauntlet, Max is all that is left to foil Dr Chronosus's evil plans. It's time to clean up this time-line.
 
-* Long range attack (sending the enemy back to its own time with paradox gauntlet). Large jump. Time paradox (start it by pressing E and it will "record" what you do. Thenm it will send you back and you can do something else while your ghost goes thru the "recording").
+### Abilities
+* Long range attack (sending the enemy back to its own time with paradox gauntlet). 
+* Large jump.
+* Time paradox (start it by pressing E and it will "record" what you do. Then it will send you back and you can do something else while your ghost goes thru the "recording").
 
 ## Dr Chronosus
 
