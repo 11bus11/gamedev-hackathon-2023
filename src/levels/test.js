@@ -55,7 +55,7 @@ export class TestMap extends Phaser.Scene {
         this.#player = new Player(this, 50, 260);
         this.#player.setColliders(this.#layers.platforms, this.#layers.walls);
 
-        this.#viking = new Viking(this, 200, 180, "test-viking");
+        this.#viking = new Viking(this, 200, 180, "test-viking").setScale(0.2);
         this.#viking.setColliders(this.#layers.platforms, this.#layers.walls);
     }
 
