@@ -1,4 +1,5 @@
 import { Player } from "../entities/player.js";
+import { Viking } from "../entities/enemy.js";
 
 
 export class TestMap extends Phaser.Scene {
@@ -13,6 +14,7 @@ export class TestMap extends Phaser.Scene {
     }
 
     #player = null;
+    #viking = null;
 
     #createLayer(name, collides = false) {
         const layer = this.#map.createLayer(name, this.#tileset, 0, 0);
@@ -34,6 +36,11 @@ export class TestMap extends Phaser.Scene {
             key: 'test-sprite',
             url: 'characters/test.png'
         });
+
+        this.load.image({
+            key: 'test-viking',
+            url: 'characters/viking-head.png'
+        });
     }
 
     create() {
@@ -47,6 +54,9 @@ export class TestMap extends Phaser.Scene {
 
         this.#player = new Player(this, 50, 260);
         this.#player.setColliders(this.#layers.platforms, this.#layers.walls);
+
+        this.#viking = new Viking(this, 200, 180, "test-viking");
+        this.#viking.setColliders(this.#layers.platforms, this.#layers.walls);
     }
 
     update() {
