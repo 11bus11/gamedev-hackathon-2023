@@ -23,10 +23,10 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
     }
 
     jump(velocity) {
-        this.body.velocity.y = velocity;
+        this.body.setVelocityY(velocity);
     }
 
     move(velocity) {
-        this.body.velocity.x = velocity;
+        this.body.setVelocityX(velocity);
     }
 }

@@ -14,6 +14,9 @@ export class Player extends Actor {
     }
 
     update() {
-
+        this.body.velocity.x = 0;
+        if (this.#jumpKey?.isDown) this.jump(-100);
+        if (this.#leftKey?.isDown) this.move(-100);
+        if (this.#rightKey?.isDown) this.move(100);
     }
 }

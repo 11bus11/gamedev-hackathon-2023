@@ -45,17 +45,6 @@ export class TestMap extends Phaser.Scene {
         this.#layers.platforms = this.#createLayer('platforms', true);
         this.#layers.walls = this.#createLayer('walls', true);
 
-
-
-        const debugGraphics = this.add.graphics().setAlpha(0.7);
-        this.#layers.walls.renderDebug(debugGraphics, {
-            tileColor: null,
-            collidingTileColor: new Phaser.Display.Color(243, 234, 48, 255),
-        });
-
-
-
-
         this.#player = new Player(this, 50, 260);
         this.#player.setColliders(this.#layers.platforms, this.#layers.walls);
     }
