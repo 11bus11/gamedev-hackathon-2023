@@ -19,8 +19,8 @@ export class Player extends Actor {
         if (this.#rightKey?.isDown) this.move(100);
     }
 
-    getCrystal(player, crystal) {
-        crystal.die();
+    getPickup(player, pickup) {
+        pickup.die();
         // React to pidkup here :-
     }
 

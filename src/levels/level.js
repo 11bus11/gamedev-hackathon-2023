@@ -1,17 +1,31 @@
+
 import { Player } from "../entities/player.js";
 
 export class Level extends Phaser.Scene {
 
     #mapLayers = [];
 
-    // Resource loading
+    #player = null;
+    #actors = [];
+
+    /*
+     * Accessors
+     */
+    get player() { return this.#player; }
+    get actors() { return this.#actors; }
+
+    /*
+     * Resource loading
+     */
     loadImages(...args) {
         for (const image of args) {
             this.load.image(image);
         }
     }
 
-    // Map creation
+    /*
+     * Creation
+     */
     #createMapLayers(map, tiles, layers) {
         for (const def of layers) {
             const layer =map.createLayer(def.name, tiles, 0, 0);
@@ -35,8 +49,36 @@ export class Level extends Phaser.Scene {
     createPlayer(map) {
         // Grab the player spawn point from the map
         const spawn = map.getObjectLayer('player').objects[0];
-        const player = new Player(this, spawn.x, spawn.y);
-        player.setColliders(this.#mapLayers);
-        return player;
+        this.#player = new Player(this, spawn.x, spawn.y);
+        this.#player.setColliders(this.#mapLayers);
+        return this.#player;
+    }
+
+    createActors(map, layer, factory, player, callback, context = this) {
+        const actors = [];
+        const defs = map.getObjectLayer(layer).objects;
+
+        for (const def of defs) {
+            const actor = factory.create(def.type.toLowerCase(), this, def.x, def.y);
+
+            actor.setColliders(this.#mapLayers);
+            actors.push(actor);
+        }
+        this.physics.add.overlap(player, actors, callback, null, context);
+
+        this.#actors.push(...actors);
+
+        return actors;
+    }
+
+    /*
+     * Updates
+     */
+    updateActors() {
+        this.#player.update();
+        
+        for (const actor of this.#actors) {
+            actor.update();
+        }
     }
 }
