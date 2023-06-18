@@ -28,7 +28,7 @@
         "egypt-tiles.tsx"
     ],
     "project": "test.tiled-project",
-    "property.type": "bool",
+    "property.type": "int",
     "recentFiles": [
         "crystal.tsx",
         "egypt-tiles.tsx"

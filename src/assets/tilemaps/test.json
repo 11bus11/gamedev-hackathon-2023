@@ -209,21 +209,44 @@
                  "height":32,
                  "id":12,
                  "name":"Viking",
+                 "properties":[
+                        {
+                         "name":"maxDistance",
+                         "type":"int",
+                         "value":30
+                        }],
                  "rotation":0,
                  "type":"viking",
                  "visible":true,
                  "width":32,
-                 "x":194.590805537707,
-                 "y":217.022022314388
+                 "x":192,
+                 "y":215
+                }, 
+                {
+                 "height":32,
+                 "id":15,
+                 "name":"Viking",
+                 "rotation":0,
+                 "type":"viking",
+                 "visible":true,
+                 "width":32,
+                 "x":361.405222267656,
+                 "y":266.072550966762
                 }],
          "opacity":1,
+         "properties":[
+                {
+                 "name":"maxDistance",
+                 "type":"int",
+                 "value":0
+                }],
          "type":"objectgroup",
          "visible":true,
          "x":0,
          "y":0
         }],
- "nextlayerid":8,
- "nextobjectid":13,
+ "nextlayerid":10,
+ "nextobjectid":16,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.1",
@@ -339,6 +362,45 @@
                          "value":true
                         }],
                  "type":"wall"
+                }, 
+                {
+                 "id":25,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":15.9298640391674,
+                             "id":1,
+                             "name":"",
+                             "properties":[
+                                    {
+                                     "name":"collides",
+                                     "type":"bool",
+                                     "value":true
+                                    }],
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":16.0134122771351,
+                             "x":-1.77635683940025e-15,
+                             "y":0.0278494126558861
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    },
+                 "properties":[
+                        {
+                         "name":"collides",
+                         "type":"bool",
+                         "value":true
+                        }],
+                 "type":"colider"
                 }, 
                 {
                  "id":26,
@@ -846,7 +908,8 @@
                          "value":true
                         }],
                  "type":"wall"
-                }, 
+                },
+            
                 {
                  "id":66,
                  "objectgroup":
@@ -879,8 +942,7 @@
                          "value":true
                         }],
                  "type":"wall"
-                },
-            
+                }, 
                 {
                  "id":68,
                  "objectgroup":
@@ -1348,7 +1410,8 @@
                          "value":false
                         }],
                  "type":"background"
-                }, 
+                },
+            
                 {
                  "id":150,
                  "properties":[
@@ -1358,8 +1421,7 @@
                          "value":false
                         }],
                  "type":"background"
-                },
-            
+                }, 
                 {
                  "id":151,
                  "properties":[
@@ -1649,7 +1711,8 @@
                          "value":false
                         }],
                  "type":"decorations"
-                }, 
+                },
+            
                 {
                  "id":205,
                  "properties":[
@@ -1659,8 +1722,7 @@
                          "value":false
                         }],
                  "type":"decorations"
-                },
-            
+                }, 
                 {
                  "id":206,
                  "properties":[
@@ -2018,7 +2080,8 @@
                          "value":false
                         }],
                  "type":"background"
-                }, 
+                },
+            
                 {
                  "id":264,
                  "properties":[
@@ -2028,8 +2091,7 @@
                          "value":false
                         }],
                  "type":"decorations"
-                },
-            
+                }, 
                 {
                  "id":265,
                  "properties":[
