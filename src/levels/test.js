@@ -12,7 +12,7 @@ export class TestMap extends Level {
     preload() {
         this.load.setBaseURL("src/assets/");
 
-        this.load.tilemapTiledJSON('testbig', 'tilemaps/test.json');
+        this.load.tilemapTiledJSON('testbig', 'tilemaps/testbig.json');
 
         this.loadImages(
             { key: 'egypt-tiles', url: 'tilemaps/egypt-tiles.png'},
@@ -30,6 +30,8 @@ export class TestMap extends Level {
         ], 16);
 
         this.createPlayer();
+
+        this.setupCamera();
 
         this.#enemies = this.createActors('enemies', Enemies, this.player, this.player.enemyCollision, this.player);
         this.#pickups = this.createActors('pickups', Pickups, this.player, this.player.getPickup, this.player);

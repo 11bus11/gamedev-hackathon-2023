@@ -434,6 +434,6 @@
 </data>
  </layer>
  <objectgroup id="4" name="player">
-  <object id="1" name="Player Spawn" x="42.0769" y="1524.87" width="32" height="32"/>
+  <object id="1" name="Player Spawn" x="27.3088" y="1540.71" width="32" height="32"/>
  </objectgroup>
 </map>

@@ -16,6 +16,8 @@ export class Level extends Phaser.Scene {
     #tileset = null;
     #layers = [];
 
+    #camera = null;
+
     #player = null;
     #actors = [];
 
@@ -25,6 +27,7 @@ export class Level extends Phaser.Scene {
     get map() { return this.#map; }
     get tileset() { return this.#tileset; }
     get layers() { return this.#layers; }
+    get camera() { return this.#camera; }
     get player() { return this.#player; }
     get actors() { return this.#actors; }
 
@@ -56,8 +59,8 @@ export class Level extends Phaser.Scene {
         this.#tileset = this.#map.addTilesetImage(tileset);
 
         this.#createMapLayers(layers);
-        
-        return [this.#map, this.#tileset, this.#layers];
+
+        this.physics.world.setBounds(0, 0, this.#map.widthInPixels, this.#map.heightInPixels);
     }
 
     createPlayer() {
@@ -91,6 +94,12 @@ export class Level extends Phaser.Scene {
         this.#actors.push(...actors);
 
         return actors;
+    }
+
+    setupCamera() {
+        this.#camera = this.cameras.main;
+        this.#camera.setBounds(0, 0, this.#map.widthInPixels, this.#map.heightInPixels);
+        this.#camera.startFollow(this.#player);
     }
 
     /*
