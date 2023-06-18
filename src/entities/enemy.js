@@ -10,6 +10,10 @@ export class Viking extends Actor {
     update() {
         this.body.setVelosityX(100);
 
-        this.body.maxDistance = 300;
+        this.body.maxDistance = 100;
+
+        function hitEnemy(player) {
+            player.disableBody(false, false);
+        }
     }
 }
