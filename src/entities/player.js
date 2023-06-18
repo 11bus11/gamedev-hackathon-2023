@@ -5,8 +5,8 @@ export class Player extends Actor {
     #leftKey;
     #rightKey;
 
-    constructor(scene, x, y) {
-        super(scene, x, y, 'test-sprite');
+    constructor(scene, rect) {
+        super(scene, rect, 'test-sprite');
         this.#jumpKey = this.scene.input.keyboard.addKey('W');
         this.#leftKey = this.scene.input.keyboard.addKey('A');
         this.#rightKey = this.scene.input.keyboard.addKey('D');

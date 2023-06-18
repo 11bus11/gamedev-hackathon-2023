@@ -5,25 +5,22 @@ export default class Enemies extends Factory {}
 
 Enemies.register(
     class Viking extends Actor {
-        #dir = -100;
+        #dir = -50;
 
-        constructor(scene, x, y) {
-            super(scene, x, y, 'test-viking');
+        constructor(scene, rect) {
+            super(scene, rect, 'test-viking');
         }
 
         update() {
             if (this.alive) {
-                if (this.body.blocked.left) {
-                    this.#dir = 100;
+                if (this.blockedLeft) {
+                    this.#dir = 50;
                 }
-                if (this.body.blocked.right) {
-                    this.#dir = -100;
+                if (this.blockedRight) {
+                    this.#dir = -50;
                 }
+                
                 this.move(this.#dir);
-                if (!this.body.blocked.down) {
-                    this.#dir *= -1;
-                    this.move(this.#dir);
-                }
             }
         }
     }

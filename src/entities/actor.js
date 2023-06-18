@@ -6,21 +6,53 @@
  */
 export class Actor extends Phaser.Physics.Arcade.Sprite {
 
-    #scene = null;
-    #isAlive = true;
+    #scene = null;      // The scene this actor is in
+    #spawn = null;      // Original spawn point
+    #isAlive = true;    // Is this actor alive?
 
-    constructor(scene, x, y, image) {
-        super(scene, x, y, image);
+    #maxDistance = 0;   // If higher than 0 this actor will not move more than maxDistance from it's spawn point
 
-        this.#scene = scene;
+    constructor(scene, rect, image) {
+        super(scene, rect.x, rect.y, image);
+
         scene.add.existing(this);
         scene.physics.add.existing(this);
+        this.#scene = scene;
+
+        this.#spawn = Object.freeze({x: rect.x, y: rect.y});
+
         this.body.setCollideWorldBounds(true);
-        this.body.setSize(32, 32);
+        this.body.setSize(rect.w, rect.h);
     }
 
 
     get alive() { return this.#isAlive; }
+    get spawn() { return this.#spawn; }
+
+    set maxDistance(val) { this.#maxDistance = val; }
+    get maxDistance() { return this.#maxDistance; }
+
+
+    get blockedLeft() {
+        return (
+            this.body.blocked.left || 
+            (
+                !this.#maxDistance ? false :
+                this.x < this.#spawn.x - this.#maxDistance
+            )
+
+        );
+    }
+
+    get blockedRight() {
+        return (
+            this.body.blocked.right ||
+            (
+                !this.#maxDistance ? false :
+                this.x > this.#spawn.x + this.#maxDistance
+            )
+        );
+    }
 
     setColliders(...args) {
         for (const collider of args) {
