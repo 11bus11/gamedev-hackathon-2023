@@ -42,17 +42,10 @@ export class TestMap extends Level {
             { name: 'walls', collides: true}
         ], 16);
 
-        this.#tileset = this.#map.addTilesetImage('egypt-tiles', 'egypt-tiles');
-
-        this.#layers.background = this.#createLayer('background');
-        this.#layers.platforms = this.#createLayer('platforms', true);
-        this.#layers.walls = this.#createLayer('walls', true);
-
-        this.#player = new Player(this, 50, 260);
-        this.#player.setColliders(this.#layers.platforms, this.#layers.walls, this.#viking);
+        this.#player = this.createPlayer(this.#map);
 
         this.#viking = new Viking(this, 200, 260, "test-viking");
-        this.#viking.setColliders(this.#layers.platforms, this.#layers.walls); // Static colliders
+        this.#viking.setColliders(...this.#layers); // Static colliders
 
         // Dynamic colliders. Player -> list of enemies, objects etc.
         this.physics.add.overlap(this.#player, this.#viking, this.#player.enemyCollision, null, this.#player);
@@ -61,7 +54,7 @@ export class TestMap extends Level {
         const pickups = [];
         for (const def of pickupDefs.objects) {
             const pickup = new Crystal(this, def.x, def.y);
-            pickup.setColliders(this.#layers.platforms, this.#layers.walls);
+            pickup.setColliders(...this.#layers);
             pickups.push(pickup);
         }
         this.physics.add.overlap(this.#player, pickups, this.#player.getCrystal, null, this.#player);

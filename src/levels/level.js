@@ -31,4 +31,12 @@ export class Level extends Phaser.Scene {
         
         return [map, tiles, this.#mapLayers];
     }
+
+    createPlayer(map) {
+        // Grab the player spawn point from the map
+        const spawn = map.getObjectLayer('player').objects[0];
+        const player = new Player(this, spawn.x, spawn.y);
+        player.setColliders(this.#mapLayers);
+        return player;
+    }
 }
