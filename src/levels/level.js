@@ -40,6 +40,12 @@ export class Level extends Phaser.Scene {
         }
     }
 
+    loadSprites(...args) {
+        for (const sprite of args) {
+            this.load.atlas(sprite.key, sprite.image, sprite.atlas);
+        }
+    }
+
     /*
      * Creation
      */
