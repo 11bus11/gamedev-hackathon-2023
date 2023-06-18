@@ -1,10 +1,10 @@
+import { Level } from "./level.js";
 
-import { Player } from "../entities/player.js";
 import { Viking } from "../entities/enemy.js";
 import { Crystal } from "../entities/crystal.js";
 
 
-export class TestMap extends Phaser.Scene {
+export class TestMap extends Level {
 
     #map = null;
     #tileset = null;
