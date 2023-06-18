@@ -62,7 +62,7 @@ export class TestMap extends Phaser.Scene {
         this.#viking.setColliders(this.#layers.platforms, this.#layers.walls); // Static colliders
 
         // Dynamic colliders. Player -> list of enemies, objects etc.
-        this.physics.add.collider(this.#player, this.#viking, this.playerEnemyCollision, null, this);
+        this.physics.add.collider(this.#player, this.#viking, this.#player.enemyCollision, null, this.#player);
     }
 
     update() {

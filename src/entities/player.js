@@ -23,7 +23,7 @@ export class Player extends Actor {
         // Destroys enemy only if player lands on them
         if (enemy.body.touching.up) {
             enemy.disable();
-            const tween = this.tweens.add({
+            const tween = this.scene.tweens.add({
                 targets: enemy,
                 alpha: 0.3,
                 scaleX: 1.5,
