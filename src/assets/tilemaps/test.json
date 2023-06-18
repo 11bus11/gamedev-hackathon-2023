@@ -99,7 +99,79 @@
          "draworder":"topdown",
          "id":5,
          "name":"pickups",
-         "objects":[],
+         "objects":[
+                {
+                 "gid":295,
+                 "height":16,
+                 "id":1,
+                 "name":"",
+                 "rotation":0,
+                 "type":"crystal",
+                 "visible":true,
+                 "width":16,
+                 "x":167.524271277528,
+                 "y":61.8349202640341
+                }, 
+                {
+                 "gid":295,
+                 "height":16,
+                 "id":2,
+                 "name":"",
+                 "rotation":0,
+                 "type":"crystal",
+                 "visible":true,
+                 "width":16,
+                 "x":185.469244698873,
+                 "y":61.8349202640341
+                }, 
+                {
+                 "gid":295,
+                 "height":16,
+                 "id":3,
+                 "name":"",
+                 "rotation":0,
+                 "type":"crystal",
+                 "visible":true,
+                 "width":16,
+                 "x":203.414218120217,
+                 "y":61.2741398446171
+                }, 
+                {
+                 "gid":295,
+                 "height":16,
+                 "id":4,
+                 "name":"",
+                 "rotation":0,
+                 "type":"crystal",
+                 "visible":true,
+                 "width":16,
+                 "x":220.798411122145,
+                 "y":62.3957006834511
+                }, 
+                {
+                 "gid":295,
+                 "height":16,
+                 "id":5,
+                 "name":"",
+                 "rotation":0,
+                 "type":"crystal",
+                 "visible":true,
+                 "width":16,
+                 "x":184.347683860039,
+                 "y":156.046030726094
+                }, 
+                {
+                 "gid":295,
+                 "height":16,
+                 "id":6,
+                 "name":"",
+                 "rotation":0,
+                 "type":"crystal",
+                 "visible":true,
+                 "width":16,
+                 "x":201.731876861966,
+                 "y":156.046030726094
+                }],
          "opacity":1,
          "type":"objectgroup",
          "visible":true,
@@ -107,7 +179,7 @@
          "y":0
         }],
  "nextlayerid":6,
- "nextobjectid":1,
+ "nextobjectid":10,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.1",
@@ -1983,6 +2055,124 @@
                          "value":false
                         }],
                  "type":"decorations"
+                }],
+         "tilewidth":16
+        }, 
+        {
+         "columns":4,
+         "firstgid":295,
+         "image":"..\/items\/time-crystal.png",
+         "imageheight":16,
+         "imagewidth":64,
+         "margin":0,
+         "name":"crystal",
+         "spacing":0,
+         "tilecount":4,
+         "tileheight":16,
+         "tiles":[
+                {
+                 "id":0,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":15,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":10,
+                             "x":3,
+                             "y":1
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    }
+                }, 
+                {
+                 "id":1,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":15,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":10,
+                             "x":3,
+                             "y":1
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    }
+                }, 
+                {
+                 "id":2,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":15,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":10,
+                             "x":3,
+                             "y":1
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    }
+                }, 
+                {
+                 "id":3,
+                 "objectgroup":
+                    {
+                     "draworder":"index",
+                     "id":2,
+                     "name":"",
+                     "objects":[
+                            {
+                             "height":15.0835482379677,
+                             "id":1,
+                             "name":"",
+                             "rotation":0,
+                             "type":"",
+                             "visible":true,
+                             "width":10.1392470632794,
+                             "x":2.86075293672056,
+                             "y":0.916451762032339
+                            }],
+                     "opacity":1,
+                     "type":"objectgroup",
+                     "visible":true,
+                     "x":0,
+                     "y":0
+                    }
                 }],
          "tilewidth":16
         }],

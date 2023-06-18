@@ -1,7 +1,7 @@
 
 import { Player } from "../entities/player.js";
 import { Viking } from "../entities/enemy.js";
-
+import { Crystal } from "../entities/crystal.js";
 
 
 export class TestMap extends Phaser.Scene {
@@ -33,6 +33,11 @@ export class TestMap extends Phaser.Scene {
             key: 'egypt-tiles',
             url: 'tilemaps/egypt-tiles.png'
         });
+
+        this.load.image({
+            key: 'crystal',
+            url: 'items/test-crystal.png'
+        });
         this.load.tilemapTiledJSON('test', 'tilemaps/test.json');
 
         this.load.image({
@@ -63,6 +68,15 @@ export class TestMap extends Phaser.Scene {
 
         // Dynamic colliders. Player -> list of enemies, objects etc.
         this.physics.add.collider(this.#player, this.#viking, this.#player.enemyCollision, null, this.#player);
+
+        const pickupDefs = this.#map.getObjectLayer('pickups');
+        const pickups = [];
+        for (const def of pickupDefs.objects) {
+            const pickup = new Crystal(this, def.x, def.y);
+            pickup.setColliders(this.#layers.platforms, this.#layers.walls);
+            pickups.push(pickup);
+        }
+        this.physics.add.collider(this.#player, pickups, this.#player.getCrystal, null, this.#player);
     }
 
     update() {

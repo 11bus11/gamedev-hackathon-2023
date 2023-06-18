@@ -16,6 +16,7 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
         this.body.setCollideWorldBounds(true);
         this.body.setSize(32, 32);
+        this.body.pushable = false;
     }
 
 
