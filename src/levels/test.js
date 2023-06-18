@@ -6,19 +6,13 @@ import Pickups from "../entities/pickups.js";
 
 export class TestMap extends Level {
 
-    #map = null;
-    #tileset = null;
-    // Map Layers
-    #layers = null;
-
-    // #player = null;
     #enemies = null;
     #pickups = null;
 
     preload() {
         this.load.setBaseURL("src/assets/");
 
-        this.load.tilemapTiledJSON('test', 'tilemaps/test.json');
+        this.load.tilemapTiledJSON('testbig', 'tilemaps/test.json');
 
         this.loadImages(
             { key: 'egypt-tiles', url: 'tilemaps/egypt-tiles.png'},
@@ -29,16 +23,16 @@ export class TestMap extends Level {
     }
 
     create() {
-        [this.#map, this.#tileset, this.#layers] = this.createMap('test', 'egypt-tiles', [
+        this.createMap('testbig', 'egypt-tiles', [
             { name: 'background', collides: false },
             { name: 'platforms', collides: true },
             { name: 'walls', collides: true},
         ], 16);
 
-        this.createPlayer(this.#map);
+        this.createPlayer();
 
-        this.#enemies = this.createActors(this.#map, 'enemies', Enemies, this.player, this.player.enemyCollision, this.player);
-        this.#pickups = this.createActors(this.#map, 'pickups', Pickups, this.player, this.player.getPickup, this.player);
+        this.#enemies = this.createActors('enemies', Enemies, this.player, this.player.enemyCollision, this.player);
+        this.#pickups = this.createActors('pickups', Pickups, this.player, this.player.getPickup, this.player);
     }
 
     update() {

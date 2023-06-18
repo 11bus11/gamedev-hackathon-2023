@@ -21,7 +21,7 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
 
         this.#spawn = Object.freeze({x: rect.x, y: rect.y});
 
-        this.body.setCollideWorldBounds(true);
+        // this.body.setCollideWorldBounds(true);
         this.body.setSize(rect.w, rect.h);
     }
 
