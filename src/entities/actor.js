@@ -29,7 +29,9 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
         this.#rect = rect;
     }
 
-
+    /*
+     * Accessors 
+     */
     get alive() { return this.#isAlive; }
     get spawn() { return this.#spawn; }
 
@@ -58,12 +60,18 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
         );
     }
 
+    /*
+     * Collision detection
+     */
     setColliders(...args) {
         for (const collider of args) {
             this.#scene.physics.add.collider(this, collider);
         }
     }
 
+    /*
+     * Animation
+     */
     addAnimation(key, sprite, prefix, count, rate) {
         if (!this.scene.anims.exists(key)) {
             this.scene.anims.create({
@@ -89,6 +97,27 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
         }
     }
 
+    /*
+     * Actor actions
+     */
+    jump(velocity) {
+        if (this.#isAlive && this.body.blocked.down) {
+          this.body.setVelocityY(velocity);
+        }
+    }
+
+    move(velocity) {
+        if (this.#isAlive) {
+            this.body.setVelocityX(velocity);
+            this.checkDirection();
+        }
+    }
+
+    /*
+     * Lifecycle
+     */
+    update() {}
+
     disable() {
         this.disableBody(false, false);
     }
@@ -106,19 +135,4 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
         });
         this.#isAlive = false;
     }
-
-    jump(velocity) {
-        if (this.#isAlive && this.body.blocked.down) {
-          this.body.setVelocityY(velocity);
-        }
-    }
-
-    move(velocity) {
-        if (this.#isAlive) {
-            this.body.setVelocityX(velocity);
-            this.checkDirection();
-        }
-    }
-
-    update() {}
 }
