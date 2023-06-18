@@ -19,33 +19,15 @@ export class Player extends Actor {
         if (this.#rightKey?.isDown) this.move(100);
     }
 
-    getCrystal(player, crystal) {
-        crystal.disable();
-        const tween = this.scene.tweens.add({
-            targets: crystal,
-            alpha: 0.3,
-            scaleX: 1.5,
-            scaleY: 1.5,
-            ease: 'Linear',
-            duration: 200,
-            onComplete: () => crystal.die()
-        });
+    getPickup(player, pickup) {
+        pickup.die();
         // React to pidkup here :-
     }
 
     enemyCollision(player, enemy) {
         // Destroys enemy only if player lands on them
         if (enemy.body.touching.up) {
-            enemy.disable();
-            const tween = this.scene.tweens.add({
-                targets: enemy,
-                alpha: 0.3,
-                scaleX: 1.5,
-                scaleY: 1.5,
-                ease: 'Linear',
-                duration: 200,
-                onComplete: () => enemy.die()
-            });
+            enemy.die();
         }
         // TODO: Harm player if not jumping on enemy
     }
