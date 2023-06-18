@@ -44,6 +44,23 @@ export class TestMap extends Phaser.Scene {
         });
     }
 
+    playerEnemyCollision(player, enemy) {
+        // Destroys enemy only if player lands on them
+        if (enemy.body.touching.up) {
+            enemy.disableBody(false, false);
+            const tween = this.tweens.add({
+                targets: enemy,
+                alpha: 0.3,
+                scaleX: 1.5,
+                scaleY: 1.5,
+                ease: 'Linear',
+                duration: 200,
+                onComplete: () => enemy.destroy(true)
+            });
+        }
+        // TODO: Harm player if not jumping on ennemy
+    }
+
     create() {
         this.#map = this.make.tilemap({key: 'test', tileWidth: 16, tileHeight: 16});
 
@@ -56,11 +73,11 @@ export class TestMap extends Phaser.Scene {
         this.#player = new Player(this, 50, 260);
         this.#player.setColliders(this.#layers.platforms, this.#layers.walls, this.#viking);
 
-        this.#viking = new Viking(this, 200, 300, "test-viking").setScale(0.2);
-        this.#viking.setColliders(this.#layers.platforms, this.#layers.walls, this.#player);
+        this.#viking = new Viking(this, 200, 260, "test-viking");
+        this.#viking.setColliders(this.#layers.platforms, this.#layers.walls); // Static colliders
 
-        //this.physics.add.collider(this.#player, this.#viking, hitEnemy, null, this)
-        
+        // Dynamic colliders. Player -> list of enemies, objects etc.
+        this.physics.add.collider(this.#player, this.#viking, this.playerEnemyCollision, null, this);
     }
 
     update() {
