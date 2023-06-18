@@ -16,7 +16,6 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
         this.body.setCollideWorldBounds(true);
         this.body.setSize(32, 32);
-        this.body.pushable = false;
     }
 
 
@@ -33,8 +32,17 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
     }
 
     die() {
+        this.disable();
+        const tween = this.#scene.tweens.add({
+            targets: this,
+            alpha: 0.3,
+            scaleX: 1.5,
+            scaleY: 1.5,
+            ease: 'Linear',
+            duration: 200,
+            onComplete: () => this.destroy(true)
+        });
         this.#isAlive = false;
-        this.destroy(true);
     }
 
     jump(velocity) {
