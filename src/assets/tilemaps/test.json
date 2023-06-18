@@ -221,6 +221,17 @@
                  "width":32,
                  "x":192,
                  "y":215
+                }, 
+                {
+                 "height":32,
+                 "id":15,
+                 "name":"Viking",
+                 "rotation":0,
+                 "type":"viking",
+                 "visible":true,
+                 "width":32,
+                 "x":361.405222267656,
+                 "y":266.072550966762
                 }],
          "opacity":1,
          "properties":[
@@ -235,7 +246,7 @@
          "y":0
         }],
  "nextlayerid":10,
- "nextobjectid":15,
+ "nextobjectid":16,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.10.1",
