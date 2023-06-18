@@ -14,7 +14,7 @@ export class Player extends Actor {
 
     update() {
         this.body.velocity.x = 0;
-        if (this.#jumpKey?.isDown) this.jump(-250); // Should probably have these values set as character attributes? I.e. jumpSpeed, moveSpeed
+        if (this.#jumpKey?.isDown) this.jump(-300); // Should probably have these values set as character attributes? I.e. jumpSpeed, moveSpeed
         if (this.#leftKey?.isDown) this.move(-100);
         if (this.#rightKey?.isDown) this.move(100);
     }
