@@ -9,11 +9,7 @@ export class TestMap extends Level {
     #map = null;
     #tileset = null;
     // Map Layers
-    #layers = {
-        walls: null,
-        platforms: null,
-        background: null
-    }
+    #layers = null;
 
     #player = null;
     #viking = null;
@@ -40,7 +36,11 @@ export class TestMap extends Level {
     }
 
     create() {
-        this.#map = this.make.tilemap({key: 'test', tileWidth: 16, tileHeight: 16});
+        [this.#map, this.#tileset, this.#layers] = this.createMap('test', 'egypt-tiles', [
+            { name: 'background', collides: false },
+            { name: 'platforms', collides: true },
+            { name: 'walls', collides: true}
+        ], 16);
 
         this.#tileset = this.#map.addTilesetImage('egypt-tiles', 'egypt-tiles');
 
