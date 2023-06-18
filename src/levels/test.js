@@ -1,11 +1,10 @@
-import { LevelScene } from "../scenes/level.js";
 
 import { Player } from "../entities/player.js";
 import { Viking } from "../entities/enemy.js";
 
 
 
-export class TestMap extends LevelScene {
+export class TestMap extends Phaser.Scene {
 
     #map = null;
     #tileset = null;
@@ -30,15 +29,11 @@ export class TestMap extends LevelScene {
     preload() {
         this.load.setBaseURL("src/assets/");
 
-        this.loadImage('egypt-tiles', 'tilemaps/egypt-tiles.png');
-        this.loadMap('test', 'tilemaps/test.json');
-
-
-        // this.load.image({
-        //     key: 'egypt-tiles',
-        //     url: 'tilemaps/egypt-tiles.png'
-        // });
-        // this.load.tilemapTiledJSON('test', 'tilemaps/test.json');
+        this.load.image({
+            key: 'egypt-tiles',
+            url: 'tilemaps/egypt-tiles.png'
+        });
+        this.load.tilemapTiledJSON('test', 'tilemaps/test.json');
 
         this.load.image({
             key: 'test-sprite',
@@ -49,23 +44,6 @@ export class TestMap extends LevelScene {
             key: 'test-viking',
             url: 'characters/viking-head.png'
         });
-    }
-
-    playerEnemyCollision(player, enemy) {
-        // Destroys enemy only if player lands on them
-        if (enemy.body.touching.up) {
-            enemy.disable();
-            const tween = this.tweens.add({
-                targets: enemy,
-                alpha: 0.3,
-                scaleX: 1.5,
-                scaleY: 1.5,
-                ease: 'Linear',
-                duration: 200,
-                onComplete: () => enemy.die()
-            });
-        }
-        // TODO: Harm player if not jumping on ennemy
     }
 
     create() {

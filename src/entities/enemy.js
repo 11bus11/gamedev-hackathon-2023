@@ -7,6 +7,6 @@ export class Viking extends Actor {
     }
 
     update() {
-        this.move(100);
+        this.move(-100);
     }
 }
