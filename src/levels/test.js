@@ -32,7 +32,7 @@ export class TestMap extends Level {
         [this.#map, this.#tileset, this.#layers] = this.createMap('test', 'egypt-tiles', [
             { name: 'background', collides: false },
             { name: 'platforms', collides: true },
-            { name: 'walls', collides: true}
+            { name: 'walls', collides: true},
         ], 16);
 
         this.createPlayer(this.#map);
