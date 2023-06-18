@@ -64,10 +64,25 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
         }
     }
 
+    addAnimation(key, sprite, prefix, count, rate) {
+        if (!this.scene.anims.exists(key)) {
+            this.scene.anims.create({
+                key, frameRate: rate,
+                frames: this.scene.anims.generateFrameNames(sprite, {
+                    prefix, end: count
+                })
+            });
+        }
+    }
+
+    playAnimation(key) {
+        !this.anims.isPlaying && this.anims.play('time-crystal-idle');
+    }
+
     checkDirection() {
         if (this.body.velocity.x < 0) {
             this.setScale(-1, 1);
-            this.body.setOffset(this.#rect.w,0);
+            this.body.setOffset(this.#rect.w, 0);
         } else {
             this.setScale(1, 1);
             this.body.setOffset(0,0);
