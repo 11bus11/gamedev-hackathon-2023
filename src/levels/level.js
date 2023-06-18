@@ -12,7 +12,11 @@ function calcRect(def) {
 
 export class Level extends Phaser.Scene {
 
-    #mapLayers = [];
+    #map = null;
+    #tileset = null;
+    #layers = [];
+
+    #camera = null;
 
     #player = null;
     #actors = [];
@@ -20,6 +24,10 @@ export class Level extends Phaser.Scene {
     /*
      * Accessors
      */
+    get map() { return this.#map; }
+    get tileset() { return this.#tileset; }
+    get layers() { return this.#layers; }
+    get camera() { return this.#camera; }
     get player() { return this.#player; }
     get actors() { return this.#actors; }
 
@@ -35,10 +43,10 @@ export class Level extends Phaser.Scene {
     /*
      * Creation
      */
-    #createMapLayers(map, tiles, layers) {
+    #createMapLayers(layers) {
         for (const def of layers) {
-            const layer = map.createLayer(def.name, tiles, 0, 0);
-            this.#mapLayers.push(layer);
+            const layer = this.#map.createLayer(def.name, this.#tileset, 0, 0);
+            this.#layers.push(layer);
             if (def.collides) {
                 layer.setCollisionByProperty({collides: true});
             }
@@ -46,26 +54,28 @@ export class Level extends Phaser.Scene {
     }
 
     createMap(name, tileset, layers, tilesize = 16) {
-        const map = this.make.tilemap({key: name, tileWidth: tilesize, tileHeight: tilesize});
+        this.#map = this.make.tilemap({key: name, tileWidth: tilesize, tileHeight: tilesize});
 
-        const tiles = map.addTilesetImage(tileset);
+        this.#tileset = this.#map.addTilesetImage(tileset);
 
-        this.#createMapLayers(map, tiles, layers);
-        
-        return [map, tiles, this.#mapLayers];
+        this.#createMapLayers(layers);
+
+        this.physics.world.setBounds(0, 0, this.#map.widthInPixels, this.#map.heightInPixels);
     }
 
-    createPlayer(map) {
+    createPlayer() {
         // Grab the player spawn point from the map
-        const spawn = map.getObjectLayer('player').objects[0];
+        const spawn = this.#map.getObjectLayer('player').objects[0];
         this.#player = new Player(this, calcRect(spawn));
-        this.#player.setColliders(this.#mapLayers);
+        this.#player.setColliders(this.#layers);
         return this.#player;
     }
 
-    createActors(map, layer, factory, player, callback, context = this) {
+    createActors(layer, factory, player, callback, context = this) {
         const actors = [];
-        const defs = map.getObjectLayer(layer).objects;
+        const objLayer = this.#map.getObjectLayer(layer);
+        if (!objLayer) return null;
+        const defs = objLayer.objects;
 
         for (const def of defs) {
             const actor = factory.create(def.type.toLowerCase(), this, calcRect(def));
@@ -76,7 +86,7 @@ export class Level extends Phaser.Scene {
                 }
             }
 
-            actor.setColliders(this.#mapLayers);
+            actor.setColliders(this.#layers);
             actors.push(actor);
         }
         this.physics.add.overlap(player, actors, callback, null, context);
@@ -84,6 +94,12 @@ export class Level extends Phaser.Scene {
         this.#actors.push(...actors);
 
         return actors;
+    }
+
+    setupCamera() {
+        this.#camera = this.cameras.main;
+        this.#camera.setBounds(0, 0, this.#map.widthInPixels, this.#map.heightInPixels);
+        this.#camera.startFollow(this.#player);
     }
 
     /*
