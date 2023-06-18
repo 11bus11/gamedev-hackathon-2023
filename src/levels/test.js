@@ -29,26 +29,14 @@ export class TestMap extends Level {
     preload() {
         this.load.setBaseURL("src/assets/");
 
-        this.load.image({
-            key: 'egypt-tiles',
-            url: 'tilemaps/egypt-tiles.png'
-        });
-
-        this.load.image({
-            key: 'crystal',
-            url: 'items/test-crystal.png'
-        });
         this.load.tilemapTiledJSON('test', 'tilemaps/test.json');
 
-        this.load.image({
-            key: 'test-sprite',
-            url: 'characters/test.png'
-        });
-
-        this.load.image({
-            key: 'test-viking',
-            url: 'characters/viking-head.png'
-        });
+        this.loadImages(
+            { key: 'egypt-tiles', url: 'tilemaps/egypt-tiles.png'},
+            { key: 'test-viking', url: 'characters/viking-head.png' },
+            { key: 'test-sprite', url: 'characters/test.png'},
+            { key: 'crystal', url: 'items/test-crystal.png' }
+        )
     }
 
     create() {
