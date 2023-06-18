@@ -2,6 +2,7 @@ import { Player } from "../entities/player.js";
 import { Viking } from "../entities/enemy.js";
 
 
+
 export class TestMap extends Phaser.Scene {
 
     #map = null;
@@ -53,13 +54,17 @@ export class TestMap extends Phaser.Scene {
         this.#layers.walls = this.#createLayer('walls', true);
 
         this.#player = new Player(this, 50, 260);
-        this.#player.setColliders(this.#layers.platforms, this.#layers.walls);
+        this.#player.setColliders(this.#layers.platforms, this.#layers.walls, this.#viking);
 
-        this.#viking = new Viking(this, 200, 180, "test-viking").setScale(0.2);
-        this.#viking.setColliders(this.#layers.platforms, this.#layers.walls);
+        this.#viking = new Viking(this, 200, 300, "test-viking").setScale(0.2);
+        this.#viking.setColliders(this.#layers.platforms, this.#layers.walls, this.#player);
+
+        //this.physics.add.collider(this.#player, this.#viking, hitEnemy, null, this)
+        
     }
 
     update() {
         this.#player.update();
+
     }
 }
