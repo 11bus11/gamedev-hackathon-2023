@@ -1,4 +1,5 @@
 import { Actor } from "./actor.js";
+import { Viking } from "./enemy.js";
 
 export class Player extends Actor {
     #jumpKey;
@@ -14,6 +15,14 @@ export class Player extends Actor {
     }
 
     update() {
+        function hitEnemy(player, Viking) {
+            if (this.Viking?.touching) {
+                player.disableBody(false, false);
+                Viking.jump(-100);
+            }
+            
+        }
+
         this.body.velocity.x = 0;
         if (this.#jumpKey?.isDown) this.jump(-200); // Should probably have these values set as character attributes? I.e. jumpSpeed, moveSpeed
         if (this.#leftKey?.isDown) this.move(-100);
