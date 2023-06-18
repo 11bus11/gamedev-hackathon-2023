@@ -7,6 +7,7 @@
 export class Actor extends Phaser.Physics.Arcade.Sprite {
 
     #scene = null;
+    #isAlive = true;
 
     constructor(scene, x, y, image) {
         super(scene, x, y, image);
@@ -17,19 +18,33 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
         this.body.setSize(32, 32);
     }
 
+
+    get alive() { return this.#isAlive; }
+
     setColliders(...args) {
         for (const collider of args) {
             this.#scene.physics.add.collider(this, collider);
         }
     }
 
+    disable() {
+        this.disableBody(false, false);
+    }
+
+    die() {
+        this.#isAlive = false;
+        this.destroy(true);
+    }
+
     jump(velocity) {
-        if (this.body.blocked.down) {
+        if (this.#isAlive && this.body.blocked.down) {
           this.body.setVelocityY(velocity);
         }
     }
 
     move(velocity) {
-        this.body.setVelocityX(velocity);
+        if (this.#isAlive) {
+            this.body.setVelocityX(velocity);
+        }
     }
 }

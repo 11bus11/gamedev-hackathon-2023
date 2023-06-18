@@ -1,3 +1,4 @@
+
 import { Player } from "../entities/player.js";
 import { Viking } from "../entities/enemy.js";
 
@@ -27,6 +28,7 @@ export class TestMap extends Phaser.Scene {
 
     preload() {
         this.load.setBaseURL("src/assets/");
+
         this.load.image({
             key: 'egypt-tiles',
             url: 'tilemaps/egypt-tiles.png'
@@ -42,23 +44,6 @@ export class TestMap extends Phaser.Scene {
             key: 'test-viking',
             url: 'characters/viking-head.png'
         });
-    }
-
-    playerEnemyCollision(player, enemy) {
-        // Destroys enemy only if player lands on them
-        if (enemy.body.touching.up) {
-            enemy.disableBody(false, false);
-            const tween = this.tweens.add({
-                targets: enemy,
-                alpha: 0.3,
-                scaleX: 1.5,
-                scaleY: 1.5,
-                ease: 'Linear',
-                duration: 200,
-                onComplete: () => enemy.destroy(true)
-            });
-        }
-        // TODO: Harm player if not jumping on ennemy
     }
 
     create() {
@@ -77,11 +62,11 @@ export class TestMap extends Phaser.Scene {
         this.#viking.setColliders(this.#layers.platforms, this.#layers.walls); // Static colliders
 
         // Dynamic colliders. Player -> list of enemies, objects etc.
-        this.physics.add.collider(this.#player, this.#viking, this.playerEnemyCollision, null, this);
+        this.physics.add.collider(this.#player, this.#viking, this.#player.enemyCollision, null, this.#player);
     }
 
     update() {
         this.#player.update();
-
+        this.#viking.update();
     }
 }
