@@ -8,13 +8,18 @@
         "."
     ],
     "fileStates": {
+        "crystal.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "egypt-tiles.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
         }
     },
+    "frame.defaultDuration": 200,
     "last.exportedFilePath": "/home/sean/Documents/github/gamedev-hackathon-2023/src/assets/tilemaps",
-    "last.imagePath": "/home/sean/Documents/github/gamedev-hackathon-2023/src/assets/tilemaps",
+    "last.imagePath": "/home/sean/Documents/github/gamedev-hackathon-2023/src/assets/items",
     "map.lastUsedExportFilter": "JSON map files (*.tmj *.json)",
     "map.lastUsedFormat": "tmx",
     "map.tileHeight": 16,
@@ -25,6 +30,7 @@
     "project": "test.tiled-project",
     "property.type": "bool",
     "recentFiles": [
+        "crystal.tsx",
         "egypt-tiles.tsx"
     ],
     "tileset.lastUsedFormat": "tsx",
