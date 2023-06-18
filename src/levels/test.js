@@ -1,9 +1,11 @@
+import { LevelScene } from "../scenes/level.js";
+
 import { Player } from "../entities/player.js";
 import { Viking } from "../entities/enemy.js";
 
 
 
-export class TestMap extends Phaser.Scene {
+export class TestMap extends LevelScene {
 
     #map = null;
     #tileset = null;
@@ -27,11 +29,16 @@ export class TestMap extends Phaser.Scene {
 
     preload() {
         this.load.setBaseURL("src/assets/");
-        this.load.image({
-            key: 'egypt-tiles',
-            url: 'tilemaps/egypt-tiles.png'
-        });
-        this.load.tilemapTiledJSON('test', 'tilemaps/test.json');
+
+        this.loadImage('egypt-tiles', 'tilemaps/egypt-tiles.png');
+        this.loadMap('test', 'tilemaps/test.json');
+
+
+        // this.load.image({
+        //     key: 'egypt-tiles',
+        //     url: 'tilemaps/egypt-tiles.png'
+        // });
+        // this.load.tilemapTiledJSON('test', 'tilemaps/test.json');
 
         this.load.image({
             key: 'test-sprite',
@@ -47,7 +54,7 @@ export class TestMap extends Phaser.Scene {
     playerEnemyCollision(player, enemy) {
         // Destroys enemy only if player lands on them
         if (enemy.body.touching.up) {
-            enemy.disableBody(false, false);
+            enemy.disable();
             const tween = this.tweens.add({
                 targets: enemy,
                 alpha: 0.3,
@@ -55,7 +62,7 @@ export class TestMap extends Phaser.Scene {
                 scaleY: 1.5,
                 ease: 'Linear',
                 duration: 200,
-                onComplete: () => enemy.destroy(true)
+                onComplete: () => enemy.die()
             });
         }
         // TODO: Harm player if not jumping on ennemy
@@ -82,6 +89,6 @@ export class TestMap extends Phaser.Scene {
 
     update() {
         this.#player.update();
-
+        this.#viking.update();
     }
 }
