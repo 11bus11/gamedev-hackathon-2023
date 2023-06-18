@@ -11,18 +11,9 @@ export class Player extends Actor {
         this.#jumpKey = this.scene.input.keyboard.addKey('Space');
         this.#leftKey = this.scene.input.keyboard.addKey('A');
         this.#rightKey = this.scene.input.keyboard.addKey('D');
-        this.body.setSize(32,32);
     }
 
     update() {
-        function hitEnemy(player, Viking) {
-            if (this.Viking?.touching) {
-                player.disableBody(false, false);
-                Viking.jump(-100);
-            }
-            
-        }
-
         this.body.velocity.x = 0;
         if (this.#jumpKey?.isDown) this.jump(-200); // Should probably have these values set as character attributes? I.e. jumpSpeed, moveSpeed
         if (this.#leftKey?.isDown) this.move(-100);
