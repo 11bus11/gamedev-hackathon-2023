@@ -67,7 +67,7 @@ export class TestMap extends Phaser.Scene {
         this.#viking.setColliders(this.#layers.platforms, this.#layers.walls); // Static colliders
 
         // Dynamic colliders. Player -> list of enemies, objects etc.
-        this.physics.add.collider(this.#player, this.#viking, this.#player.enemyCollision, null, this.#player);
+        this.physics.add.overlap(this.#player, this.#viking, this.#player.enemyCollision, null, this.#player);
 
         const pickupDefs = this.#map.getObjectLayer('pickups');
         const pickups = [];
@@ -76,7 +76,7 @@ export class TestMap extends Phaser.Scene {
             pickup.setColliders(this.#layers.platforms, this.#layers.walls);
             pickups.push(pickup);
         }
-        this.physics.add.collider(this.#player, pickups, this.#player.getCrystal, null, this.#player);
+        this.physics.add.overlap(this.#player, pickups, this.#player.getCrystal, null, this.#player);
     }
 
     update() {
