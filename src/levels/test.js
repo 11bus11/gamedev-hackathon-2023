@@ -20,6 +20,10 @@ export class TestMap extends Level {
             { key: 'test-sprite', url: 'characters/test.png'},
             { key: 'crystal', url: 'items/test-crystal.png' }
         )
+
+        this.loadSprites(
+            { key: 'time-crystal', image: 'items/time-crystal.png', atlas: 'items/time-crystal.json'}
+        );
     }
 
     create() {

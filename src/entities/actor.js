@@ -10,6 +10,8 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
     #spawn = null;      // Original spawn point
     #isAlive = true;    // Is this actor alive?
 
+    #rect = null;       // Bounds rect
+
     #maxDistance = 0;   // If higher than 0 this actor will not move more than maxDistance from it's spawn point
 
     constructor(scene, rect, image) {
@@ -23,9 +25,13 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
 
         this.body.setCollideWorldBounds(true);
         this.body.setSize(rect.w, rect.h);
+
+        this.#rect = rect;
     }
 
-
+    /*
+     * Accessors 
+     */
     get alive() { return this.#isAlive; }
     get spawn() { return this.#spawn; }
 
@@ -54,11 +60,63 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
         );
     }
 
+    /*
+     * Collision detection
+     */
     setColliders(...args) {
         for (const collider of args) {
             this.#scene.physics.add.collider(this, collider);
         }
     }
+
+    /*
+     * Animation
+     */
+    addAnimation(key, sprite, prefix, count, rate) {
+        if (!this.scene.anims.exists(key)) {
+            this.scene.anims.create({
+                key, frameRate: rate,
+                frames: this.scene.anims.generateFrameNames(sprite, {
+                    prefix, end: count
+                })
+            });
+        }
+    }
+
+    playAnimation(key) {
+        !this.anims.isPlaying && this.anims.play('time-crystal-idle');
+    }
+
+    checkDirection() {
+        if (this.body.velocity.x < 0) {
+            this.setScale(-1, 1);
+            this.body.setOffset(this.#rect.w, 0);
+        } else {
+            this.setScale(1, 1);
+            this.body.setOffset(0,0);
+        }
+    }
+
+    /*
+     * Actor actions
+     */
+    jump(velocity) {
+        if (this.#isAlive && this.body.blocked.down) {
+          this.body.setVelocityY(velocity);
+        }
+    }
+
+    move(velocity) {
+        if (this.#isAlive) {
+            this.body.setVelocityX(velocity);
+            this.checkDirection();
+        }
+    }
+
+    /*
+     * Lifecycle
+     */
+    update() {}
 
     disable() {
         this.disableBody(false, false);
@@ -77,18 +135,4 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
         });
         this.#isAlive = false;
     }
-
-    jump(velocity) {
-        if (this.#isAlive && this.body.blocked.down) {
-          this.body.setVelocityY(velocity);
-        }
-    }
-
-    move(velocity) {
-        if (this.#isAlive) {
-            this.body.setVelocityX(velocity);
-        }
-    }
-
-    update() {}
 }
