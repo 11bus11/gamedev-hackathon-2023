@@ -79,9 +79,8 @@ export class Level extends Phaser.Scene {
 
     createActors(layer, factory, player, callback, context = this) {
         const actors = [];
-        const objLayer = this.#map.getObjectLayer(layer);
-        if (!objLayer) return null;
-        const defs = objLayer.objects;
+        const defs = this.#map.getObjectLayer(layer)?.objects;
+        if (!defs) return null;
 
         for (const def of defs) {
             const actor = factory.create(def.type.toLowerCase(), this, calcRect(def));

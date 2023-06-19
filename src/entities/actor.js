@@ -34,6 +34,7 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
      */
     get alive() { return this.#isAlive; }
     get spawn() { return this.#spawn; }
+    get rect() { return this.#rect; }
 
     set maxDistance(val) { this.#maxDistance = val; }
     get maxDistance() { return this.#maxDistance; }
@@ -127,8 +128,8 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
         const tween = this.#scene.tweens.add({
             targets: this,
             alpha: 0.3,
-            scaleX: 1.5,
-            scaleY: 1.5,
+            scaleX: 0.5,
+            scaleY: 0.5,
             ease: 'Linear',
             duration: 200,
             onComplete: () => this.destroy(true)
