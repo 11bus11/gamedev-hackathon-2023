@@ -1,4 +1,6 @@
 
+import { dieTween } from "../tweens/tweens.js";
+
 /**
  * Defines an Actor, anything that can interact on the map.
  * Actors should extend this, i.e. traps, pickups, buttons, enemies, the player, etc
@@ -21,7 +23,7 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
         this.#scene = scene;
 
-        this.#spawn = Object.freeze({x: rect.x, y: rect.y});
+        this.#spawn = Object.freeze({ x: rect.x, y: rect.y });
 
         this.body.setCollideWorldBounds(true);
         this.body.setSize(rect.w, rect.h);
@@ -39,13 +41,12 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
     set maxDistance(val) { this.#maxDistance = val; }
     get maxDistance() { return this.#maxDistance; }
 
-
     get blockedLeft() {
         return (
-            this.body.blocked.left || 
+            this.body.blocked.left ||
             (
                 !this.#maxDistance ? false :
-                this.x < this.#spawn.x - this.#maxDistance
+                    this.x < this.#spawn.x - this.#maxDistance
             )
 
         );
@@ -56,7 +57,7 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
             this.body.blocked.right ||
             (
                 !this.#maxDistance ? false :
-                this.x > this.#spawn.x + this.#maxDistance
+                    this.x > this.#spawn.x + this.#maxDistance
             )
         );
     }
@@ -94,7 +95,7 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
             this.body.setOffset(this.#rect.w, 0);
         } else {
             this.setScale(1, 1);
-            this.body.setOffset(0,0);
+            this.body.setOffset(0, 0);
         }
     }
 
@@ -103,7 +104,7 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
      */
     jump(velocity) {
         if (this.#isAlive && this.body.blocked.down) {
-          this.body.setVelocityY(velocity);
+            this.body.setVelocityY(velocity);
         }
     }
 
@@ -117,23 +118,20 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
     /*
      * Lifecycle
      */
-    update() {}
+    update() { }
 
     disable() {
         this.disableBody(false, false);
     }
 
-    die() {
+    die(tween = dieTween) {
         this.disable();
-        const tween = this.#scene.tweens.add({
-            targets: this,
-            alpha: 0.3,
-            scaleX: 0.5,
-            scaleY: 0.5,
-            ease: 'Linear',
-            duration: 200,
-            onComplete: () => this.destroy(true)
-        });
+
+        const t = tween(
+            this.#scene, this,
+            () => this.destroy(true)
+        );
+
         this.#isAlive = false;
     }
 }
