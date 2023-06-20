@@ -89,8 +89,8 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
         !this.anims.isPlaying && this.anims.play('time-crystal-idle');
     }
 
-    checkDirection() {
-        if (this.body.velocity.x < 0) {
+    checkDirection(facing) {
+        if (facing < 0) {
             this.setScale(-1, 1);
             this.body.setOffset(this.#rect.w, 0);
         } else {
@@ -111,7 +111,7 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
     move(velocity) {
         if (this.#isAlive) {
             this.body.setVelocityX(velocity);
-            this.checkDirection();
+            this.checkDirection(this.body.velocity.x);
         }
     }
 

@@ -40,6 +40,7 @@ export class Player extends Actor {
             // Reset player position
             this.x = this.#paradox.origin.x;
             this.y = this.#paradox.origin.y;
+            this.checkDirection(this.#paradox.actions[0].facing);
         }
     }
 
@@ -61,20 +62,20 @@ export class Player extends Actor {
                 start: performance.now(),
                 actions: [{
                     time: 0,
-                    jump: this.#jumpKey?.isDown,
-                    left: this.#leftKey?.isDown,
-                    right: this.#rightKey?.isDown
+                    x: this.x,
+                    y: this.y,
+                    facing: Math.sign(this.body.velocity.x)
                 }]
-            }
+            };
         }
 
         if (this.#recording) {
             const paradoxTime = performance.now() - this.#paradox.start;
             this.#paradox.actions.push({
                 time: paradoxTime,
-                jump: this.#jumpKey?.isDown,
-                left: this.#leftKey?.isDown,
-                right: this.#rightKey?.isDown
+                x: this.x,
+                y: this.y,
+                facing: Math.sign(this.body.velocity.x)
             });
             // Paradox max time is 30seconds
             if (paradoxTime >= 30000) {
@@ -118,6 +119,7 @@ export class Paradox extends Actor {
 
         this.#paradox = paradox;
         this.#paradoxStart = performance.now();
+        this.body.allowGravity = false;
     }
 
     update() {
@@ -129,9 +131,9 @@ export class Paradox extends Actor {
             if (paradox.actions[current].time <= paradoxTime) {
                 const actions = paradox.actions[current];
 
-                if (actions.jump) this.jump(PLAYER_JUMP); 
-                if (actions.left) this.move(-PLAYER_MOVE);
-                if (actions.right) this.move(PLAYER_MOVE);
+                this.x = actions.x;
+                this.y = actions.y;
+                this.checkDirection(actions.facing);
 
                 this.#current++;
                 if (this.#current >= paradox.actions.length) {
