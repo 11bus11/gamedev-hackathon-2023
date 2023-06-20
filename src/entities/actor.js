@@ -124,12 +124,17 @@ export class Actor extends Phaser.Physics.Arcade.Sprite {
         this.disableBody(false, false);
     }
 
+    remove() {
+        this.scene?.removeActor(this);
+        this.destroy(true);
+    }
+
     die(tween = dieTween) {
         this.disable();
 
         const t = tween(
             this.#scene, this,
-            () => this.destroy(true)
+            () => this.remove()
         );
 
         this.#isAlive = false;
