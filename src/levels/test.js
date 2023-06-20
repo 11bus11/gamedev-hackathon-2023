@@ -6,9 +6,6 @@ import Pickups from "../entities/pickups.js";
 
 export class TestMap extends Level {
 
-    #enemies = null;
-    #pickups = null;
-
     preload() {
         this.load.setBaseURL("src/assets/");
 
@@ -37,8 +34,8 @@ export class TestMap extends Level {
 
         this.setupCamera();
 
-        this.#enemies = this.createActors('enemies', Enemies, this.player, this.player.enemyCollision, this.player);
-        this.#pickups = this.createActors('pickups', Pickups, this.player, this.player.getPickup, this.player);
+        this.createActors('enemies', Enemies, this.player, this.player.enemyCollision, this.player);
+        this.createActors('pickups', Pickups, this.player, this.player.getPickup, this.player);
     }
 
     update() {

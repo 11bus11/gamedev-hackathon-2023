@@ -77,6 +77,12 @@ export class Level extends Phaser.Scene {
         return this.#player;
     }
 
+    setupCamera() {
+        this.#camera = this.cameras.main;
+        this.#camera.setBounds(0, 0, this.#map.widthInPixels, this.#map.heightInPixels);
+        this.#camera.startFollow(this.#player);
+    }
+
     createActors(layer, factory, player, callback, context = this) {
         const actors = [];
         const defs = this.#map.getObjectLayer(layer)?.objects;
@@ -84,6 +90,7 @@ export class Level extends Phaser.Scene {
 
         for (const def of defs) {
             const actor = factory.create(def.type.toLowerCase(), this, calcRect(def));
+            if (!actor) continue;
             
             if (def.properties) {
                 for (const prop of def.properties) {
@@ -93,28 +100,31 @@ export class Level extends Phaser.Scene {
 
             actor.setColliders(this.#layers);
             actors.push(actor);
+            this.addActor(actor);
         }
         this.physics.add.overlap(player, actors, callback, null, context);
-
-        this.#actors.push(...actors);
-
-        return actors;
     }
 
-    setupCamera() {
-        this.#camera = this.cameras.main;
-        this.#camera.setBounds(0, 0, this.#map.widthInPixels, this.#map.heightInPixels);
-        this.#camera.startFollow(this.#player);
+    addActor(actor) {
+        if (actor) this.#actors.push(actor);
     }
 
-    /*
-     * Updates
-     */
     updateActors() {
         this.#player.update();
         
         for (const actor of this.#actors) {
             actor.update();
+        }
+    }
+
+    removeActor(actor) {
+        const actors = this.#actors;
+        const loc = actors.indexOf(actor);
+        const last = actors.length - 1;
+        if (loc > -1) {
+            // We don't care about order here
+            [actors[loc], actors[last]] = [actors[last], actors[loc]];
+            actors.pop();
         }
     }
 }
