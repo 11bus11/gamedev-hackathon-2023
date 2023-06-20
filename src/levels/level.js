@@ -98,7 +98,6 @@ export class Level extends Phaser.Scene {
                 }
             }
 
-            actor.setColliders(this.#layers);
             actors.push(actor);
             this.addActor(actor);
         }
@@ -106,7 +105,10 @@ export class Level extends Phaser.Scene {
     }
 
     addActor(actor) {
-        if (actor) this.#actors.push(actor);
+        if (actor) {
+            this.#actors.push(actor);
+            actor.setColliders(this.#layers);
+        }
     }
 
     updateActors() {
